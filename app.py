@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bcrypt import Bcrypt
 from flask_login import login_user, logout_user, current_user, LoginManager
 from flask_migrate import Migrate
@@ -41,7 +41,9 @@ def home_form():
         print(f'User: {user}')
         
         if action == 'sign_in':
-            
+
+            # If a user is already logged in, log them out
+
             if current_user.is_authenticated:
                 logout_user()
 
@@ -79,7 +81,7 @@ def welcome():
     query_month = request.args.get('month', type=int)
     query_year = request.args.get('year', type=int)
 
-    # Fetch or initialize the last_viewed record
+    # Fetch or initialize the last_viewed record to track the month and year the user last viewed
     last_viewed = LastViewed.query.filter_by(user_id=current_user.id).first()
     if last_viewed is None:
         # If there's no last_viewed record for this user, create one with either the query params or current date
@@ -97,7 +99,7 @@ def welcome():
 
     db.session.commit()
 
-    # Use either the updated/created last_viewed record or the current date if no params were provided
+    # Use either the updated/created last_viewed record or the *current date* if no params were provided
     month = query_month if query_month else now.month
     year = query_year if query_year else now.year
 
@@ -124,7 +126,7 @@ def welcome():
 
 
 
-
+# Helper function to get the details of a month for a given year
 def get_month_details(year, month):
     padding_start_of_month, number_of_days = calendar.monthrange(year, month)
     padding_end_of_month = (6 - (number_of_days + padding_start_of_month - 1) % 7)
@@ -140,12 +142,12 @@ def get_month_details(year, month):
     day_start_of_cal = calendar.monthrange(prev_year, prev_month)[1] - padding_start_of_month + 1
     return day_start_of_cal, padding_start_of_month, number_of_days, padding_end_of_month
 
-# Add additional routes as needed
+
 
 @app.route('/addEvent', methods=['POST'])
 def add_event():
     if request.method == 'POST':
-        data = request.get_json()  # Correct way to get JSON data
+        data = request.get_json()  
         
         # Access the JSON data using keys directly
         title = data.get('title')
@@ -173,7 +175,7 @@ def day_view():
     if date:
         original_events = Event.query.filter_by(user_id=current_user.id, date=date).all()
         events_with_grid_and_col = []
-
+        #If concurrent events are present, assign them to different columns
         # Track the start times and assign columns
         start_time_to_col_start = defaultdict(lambda: 1)  # Default to column 1
 

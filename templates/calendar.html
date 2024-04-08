@@ -202,12 +202,12 @@
             }
         });
         
-
+        // Event listener for the form submission to prevent default behavior
         document.querySelector('form').addEventListener('submit', (event) => {
             event.preventDefault();
-            console.log('currentMonth:', currentMonth, 'currentYear:', currentYear);
+
         });
-        
+        //navigate to the previous month
         prevMonthButton.addEventListener('click', () => {
             let newMonth = currentMonth - 1;
             let newYear = currentYear;
@@ -217,7 +217,7 @@
             }
             window.location.href = `/welcome?month=${newMonth}&year=${newYear}`;
         });
-        
+        //navigate to the next month
         nextMonthButton.addEventListener('click', () => {
             let newMonth = currentMonth + 1;
             let newYear = currentYear;
@@ -227,17 +227,17 @@
             }
             window.location.href = `/welcome?month=${newMonth}&year=${newYear}`;
         });
-
+        // Event listener for the add event button
         addEventButton.addEventListener('click', () => {
             const overlay = document.getElementById('overlay');
             overlay.classList.toggle('hidden');
         });
-        
+        // Event listener for the cancel event button
         cancelEventButton.addEventListener('click', () => {
             const overlay = document.getElementById('overlay');
             overlay.classList.toggle('hidden');
         });
-
+        // Event listener for day buttons
         days.forEach((dayButton) => {
             dayButton.addEventListener('click', () => {
                 // Extract the day number from the <time> element within the clicked button
@@ -262,7 +262,7 @@
             });
         });
 
-        // Event listener for mini-add buttons
+        // Event listener for mini-add buttons (the shortcut button inside the day cell)
         miniAdd.forEach((miniAddButton) => {
             miniAddButton.addEventListener('click', (event) => {
                 // Prevent the event from bubbling up to parent elements
@@ -290,9 +290,8 @@
                     selectedDay = selectedDayElement;
                 }
 
-                // Optional: Auto-fill the date in the event creation form based on selected day
-                // This assumes you have an input field for the event date in your overlay form
-                const eventDateInput = document.getElementById('event-date'); // Assume this is the ID of your date input
+                // Set the date input value to the selected day
+                const eventDateInput = document.getElementById('event-date'); 
                 if (eventDateInput) {
                     eventDateInput.value = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${dayNumber.padStart(2, '0')}`;
                 }
@@ -300,7 +299,7 @@
         });
 
 
-
+        //Highlight sDay (small day) calendar inside the overlay for event creation
         sDays.forEach((day) => {
             day.addEventListener('click', () => {
                 if (selectedDay) {
@@ -312,7 +311,7 @@
                 selectedDay = day;
             });
         });
-
+        // Event listener for the create event button
         createEventButton.addEventListener('click', () => {
             const title = document.getElementById('title').value.trim();
             const startHours = parseInt(document.getElementById('start_hours').value, 10);
@@ -322,7 +321,7 @@
             const endMinutes = parseInt(document.getElementById('end_minutes').value, 10);
             const endAmpm = document.getElementById('end_ampm').value;
 
-            // Convert to 24-hour format for comparison
+            // Convert to 24-hour format for comparison to ensure end time is after start time
             const startHours24 = startAmpm === 'pm' ? (startHours % 12) + 12 : startHours % 12;
             const endHours24 = endAmpm === 'pm' ? (endHours % 12) + 12 : endHours % 12;
 

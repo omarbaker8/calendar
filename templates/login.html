@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Day</title>
+<title>Welcome</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script> 
 
@@ -154,13 +154,13 @@ $(document).ready(function() {
 });
 
 
-
+// Function to check if the password meets the criteria
 function passwordMeetsCriteria(password) {
     const minLength = 8;
     const specialCharPattern = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     return password.length >= minLength && specialCharPattern.test(password);
 }
-
+// Function to check if the email is valid
 function emailIsValid(email) {
 	console.log("testing email");
 	const minLength = 5;
@@ -169,7 +169,7 @@ function emailIsValid(email) {
 	console.log(email.length >= minLength);
     return email.length >= minLength && emailPattern.test(email);
 }
-
+// Function to hide all error messages
 function hideErrorMessages() {
     document.getElementById('pwd-error').classList.add('hidden');
     document.getElementById('email-error').classList.add('hidden');

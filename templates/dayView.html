@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Day</title>
+<title>Day View</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script> 
 </head>
 
@@ -260,18 +260,18 @@
 </body>
 <script>
   document.addEventListener('DOMContentLoaded', (event) => {
-    // Find the first event item by its class or id
+    
     const firstEventItem = document.querySelector('li[id^="event-"]');
     const cancelEventButton = document.getElementById('cancel_event');
     const updateEventButton = document.getElementById('update_event');
     const deleteEventButton = document.getElementById('delete_event');
     const form = document.querySelector('form');
-
+    // Prevent the form from submitting
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
     });
-
+    // Add event listeners to the events
     updateEventButton.addEventListener('click', () => {
       const event_id = document.getElementById('form_event_id').value;
       const title = document.getElementById('title').value.trim();
@@ -327,7 +327,7 @@
         window.location.reload();
       }});
     });
-
+    //delete event
     deleteEventButton.addEventListener('click', () => {
       const event_id = document.getElementById('form_event_id').value;
       fetch('/updateEvent', {
@@ -351,10 +351,10 @@
     });
 
 
-
+    // Scroll to the first event item
     if (firstEventItem) {
       // Scroll to the first event item with a slight offset above it
-      const yOffset = -100; // Adjust the offset as needed
+      const yOffset = -100; 
       const y = firstEventItem.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({top: y, behavior: 'smooth'});
@@ -363,6 +363,7 @@
       const overlay = document.getElementById('overlay');
       overlay.classList.toggle('hidden');
     });
+
     // Function to fill the overlay with event details
     function fillOverlayWithEventData(eventItem) {
       // Retrieve the event's data
@@ -385,13 +386,13 @@
       document.getElementById('form_event_id').value = eventId;
       document.getElementById('start_hours').value = startHour;
       
-      // Ensure minutes are "00" or "30"
+
       document.getElementById('start_minutes').value = startMinute;
       document.getElementById('start_ampm').value = startAmpm;
       
       document.getElementById('end_hours').value = endHour;
       
-      // Ensure minutes are "00" or "30"
+
       document.getElementById('end_minutes').value = endMinute;
       document.getElementById('end_ampm').value = endAmpm;
 
