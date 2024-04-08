@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Day</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script> 
+</head>
+
+<body>
+  <div id="overlay" class="fixed inset-0 z-50 bg-black hidden bg-opacity-50 flex justify-center">
+    <div class="divide-y divide-gray-200 overflow-hidden rounded-lg shadow m-20 bg-cover h-3/6 w-3/6 mt-32 bg-stone-50">
+        <div class="px-4 py-5 sm:p-6 flex justify-evenly">
+            <div class="border-gray-600 pt-9">
+                <input type="hidden" id="form_event_id" value=" ">
+                <div id="start_time" class="mt-2 rounded-lg w-full flex justify-center">
+                    <div class="self-center pt-2 text-2xl font-thin text-gray-700">
+                        <h1>Start:</h1>
+                    </div>
+                    <div class="mt-2 shadow-xl bg-slate-50 border ml-4 rounded-full">
+                        <div class="flex">
+                            <select name="start_hours" id="start_hours" class="bg-transparent appearance-none outline-none border-0 rounded-full font-thin">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <span class="text-xl mr-3">:</span>
+                            <select name="start_minutes" id="start_minutes" class="bg-transparent appearance-none outline-none mr-4 border-0 rounded-full font-thin">
+                                <option value="00">00</option>
+                                <option value="30">30</option>
+                            </select>
+                            <select name="start_ampm" id="start_ampm" class="bg-transparent text-lg appearance-none outline-none border-0 rounded-full font-thin">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="end_time" class="mt-2 rounded-lg w-full flex justify-center rounded-full">
+                    <div class="self-center pt-2 text-2xl font-thin text-gray-700">
+                        <h1>End :</h1>
+                    </div>
+                    <div class="mt-2 shadow-xl bg-slate-50 border ml-4 rounded-full">
+                        <div class="flex">
+                            <select name="end_hours" id="end_hours" class="bg-transparent border-0 appearance-none outline-none rounded-full font-thin">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <span class="text-xl mr-3">:</span>
+                            <select name="end_minutes" id="end_minutes" class="bg-transparent border-0 appearance-none outline-none mr-4 rounded-full font-thin">
+                                <option value="00">00</option>
+                                <option value="30">30</option>
+                            </select>
+                            <select name="end_ampm" id="end_ampm" class="bg-transparent text-lg border-0 appearance-none outline-none rounded-full font-thin">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="px-4 py-14 bg-prose-stone">
+                <form action="addEvent-title" class="relative">
+                    <div class="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                        <label for="title" class="sr-only">Title</label>
+                        <input type="text" name="title" id="title" class="block w-full border-0 pt-2.5 text-lg placeholder:text-gray-400 focus:ring-0 font-thin h-9" placeholder="Title" />
+                    </div>
+                    <div class="flex items-center justify-center space-x-3 px-2 py-5">
+                        <div class="flex flex-row">
+                            <button id="delete_event" class="mr-4 inline-flex items-center rounded-md bg-rose-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:hover:bg-rose-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"><svg class="h-4 w-4" fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                  width="800px" height="800px" viewBox="0 0 408.483 408.483"
+                                  xml:space="preserve">
+                              <g>
+                                <g>
+                                  <path d="M87.748,388.784c0.461,11.01,9.521,19.699,20.539,19.699h191.911c11.018,0,20.078-8.689,20.539-19.699l13.705-289.316
+                                    H74.043L87.748,388.784z M247.655,171.329c0-4.61,3.738-8.349,8.35-8.349h13.355c4.609,0,8.35,3.738,8.35,8.349v165.293
+                                    c0,4.611-3.738,8.349-8.35,8.349h-13.355c-4.61,0-8.35-3.736-8.35-8.349V171.329z M189.216,171.329
+                                    c0-4.61,3.738-8.349,8.349-8.349h13.355c4.609,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.737,8.349-8.349,8.349h-13.355
+                                    c-4.61,0-8.349-3.736-8.349-8.349V171.329L189.216,171.329z M130.775,171.329c0-4.61,3.738-8.349,8.349-8.349h13.356
+                                    c4.61,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.738,8.349-8.349,8.349h-13.356c-4.61,0-8.349-3.736-8.349-8.349V171.329z"/>
+                                  <path d="M343.567,21.043h-88.535V4.305c0-2.377-1.927-4.305-4.305-4.305h-92.971c-2.377,0-4.304,1.928-4.304,4.305v16.737H64.916
+                                    c-7.125,0-12.9,5.776-12.9,12.901V74.47h304.451V33.944C356.467,26.819,350.692,21.043,343.567,21.043z"/>
+                                </g>
+                              </g></svg>Delete
+                            </button>
+                            <button id="cancel_event" class="mr-2 inline-flex items-center rounded-md bg-rose-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:hover:bg-rose-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">Cancel</button>
+                            <button id="update_event" class="ml-2 inline-flex items-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">update</button>
+                        </div>
+                    </div>                          
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class="flex h-full flex-col">
+    <header class="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">
+        <time class="font-thin text-2xl" >Agenda for : {{ date }}</time>
+      </h1>
+    </header>
+    <div class="isolate flex flex-auto flex-col overflow-auto bg-white">
+      <div style="width: 165%" class="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full">
+        <div class="flex flex-auto">
+          <div class="sticky left-0 z-10 w-14 flex-none bg-white ring-1 ring-gray-100"></div>
+          <div class="grid flex-auto grid-cols-1 grid-rows-1">
+            <!-- Horizontal lines -->
+            <div class="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100" style="grid-template-rows: repeat(48, minmax(3.5rem, 1fr))">
+              <div class="row-end-1 h-7"></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">12AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">1AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">2AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">3AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">4AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">5AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">6AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">7AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">8AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">9AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">10AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">11AM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">12PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">1PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">2PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">3PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">4PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">5PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">6PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">7PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">8PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">9PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">10PM</div>
+              </div>
+              <div></div>
+              <div>
+                <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">11PM</div>
+              </div>
+              <div></div>
+            </div>
+  
+            <!-- Vertical lines -->
+            <div class="col-start-1 col-end-2 row-start-1 hidden grid-cols-7 grid-rows-1 divide-x divide-gray-100 sm:grid sm:grid-cols-7">
+              <div class="col-start-1 row-span-full"></div>
+              <div class="col-start-2 row-span-full"></div>
+              <div class="col-start-3 row-span-full"></div>
+              <div class="col-start-4 row-span-full"></div>
+              <div class="col-start-5 row-span-full"></div>
+              <div class="col-start-6 row-span-full"></div>
+              <div class="col-start-7 row-span-full"></div>
+              <div class="col-start-8 row-span-full w-8"></div>
+            </div>
+  
+            <!-- Events -->
+            <ol class="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8" style="grid-template-rows: 1.75rem repeat(288, minmax(0, 1fr)) auto">
+              {% for item in events %}
+                <li id="event-{{ item.event.id }}" class="relative mt-px flex" style="grid-row: {{ item.start_grid }} / span {{ item.duration }}; grid-column: {{ item.col_start }};">
+                  <a href="#" class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100 border-2 border-red-200 ">
+                    <p class="order-1 font-semibold text-blue-700 event-title">{{ item.event.title }}</p>
+                    <p class="text-blue-500 group-hover:text-blue-700">
+                      <time class="event-start" datetime="{{ item.event.start_time.strftime('%Y-%m-%dT%H:%M') }}">{{ item.event.start_time.strftime('%I:%M %p') }}</time> - 
+                      <time class="event-end" datetime="{{ item.event.end_time.strftime('%Y-%m-%dT%H:%M') }}">{{ item.event.end_time.strftime('%I:%M %p') }}</time>
+                    </p>
+                  </a>
+                </li>
+              {% endfor %}
+            
+            </ol>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Find the first event item by its class or id
+    const firstEventItem = document.querySelector('li[id^="event-"]');
+    const cancelEventButton = document.getElementById('cancel_event');
+    const updateEventButton = document.getElementById('update_event');
+    const deleteEventButton = document.getElementById('delete_event');
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+    });
+
+    updateEventButton.addEventListener('click', () => {
+      const event_id = document.getElementById('form_event_id').value;
+      const title = document.getElementById('title').value.trim();
+      const startHours = parseInt(document.getElementById('start_hours').value, 10);
+      const startMinutes = parseInt(document.getElementById('start_minutes').value, 10);
+      const startAmpm = document.getElementById('start_ampm').value;
+      const endHours = parseInt(document.getElementById('end_hours').value, 10);
+      const endMinutes = parseInt(document.getElementById('end_minutes').value, 10);
+      const endAmpm = document.getElementById('end_ampm').value;
+
+      // Convert to 24-hour format for comparison
+      const startHours24 = startAmpm === 'pm' ? (startHours % 12) + 12 : startHours % 12;
+      const endHours24 = endAmpm === 'pm' ? (endHours % 12) + 12 : endHours % 12;
+
+      const startTime = new Date(0, 0, 0, startHours24, startMinutes);
+      const endTime = new Date(0, 0, 0, endHours24, endMinutes);
+      //in yyyy-mm-dd format
+
+
+      // Check if all fields are set
+      if (!title || isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+          alert('Please make sure all fields are filled out correctly.');
+          return;
+      }
+
+      // Check if the end time is after the start time
+      if (endTime <= startTime) {
+          alert('End time must be after start time.');
+          return;
+      }
+      const formattedStartTime = `${startHours24.toString().padStart(2, '0')}:${startMinutes.toString().padStart(2, '0')}`;
+      const formattedEndTime = `${endHours24.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
+
+      fetch('/updateEvent', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              action:'update',
+              event_id: event_id,
+              title,
+              start_time: formattedStartTime,
+              end_time: formattedEndTime,
+
+          }),
+      })
+      .then(response => response.json())
+      .then(data => {
+      if (data.success) {
+        const overlay = document.getElementById('overlay');
+        overlay.classList.toggle('hidden');
+        window.location.reload();
+      }});
+    });
+
+    deleteEventButton.addEventListener('click', () => {
+      const event_id = document.getElementById('form_event_id').value;
+      fetch('/updateEvent', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              action:'delete',
+              event_id: event_id,
+          }),
+      })
+      .then(response => response.json())
+      .then(data => {
+      if (data.success) {
+        const overlay = document.getElementById('overlay');
+        overlay.classList.toggle('hidden');
+        window.location.reload();
+      }});
+
+    });
+
+
+
+    if (firstEventItem) {
+      // Scroll to the first event item with a slight offset above it
+      const yOffset = -100; // Adjust the offset as needed
+      const y = firstEventItem.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
+    cancelEventButton.addEventListener('click', () => {
+      const overlay = document.getElementById('overlay');
+      overlay.classList.toggle('hidden');
+    });
+    // Function to fill the overlay with event details
+    function fillOverlayWithEventData(eventItem) {
+      // Retrieve the event's data
+      const title = eventItem.querySelector('.event-title').textContent;
+      const startDateTime = eventItem.querySelector('.event-start').textContent;
+      // Split the start time into hours, minutes, and AM/PM
+      let [startHour, startMinute] = startDateTime.split(':');
+      let startAmpm = startMinute.split(' ')[1];
+      startMinute = startMinute.split(' ')[0];
+      startHour = parseInt(startHour, 10);
+      const endDateTime = eventItem.querySelector('.event-end').textContent;
+      let [endHour, endMinute] = endDateTime.split(':');
+      let endAmpm = endMinute.split(' ')[1];
+      endMinute = endMinute.split(' ')[0];
+      endHour = parseInt(endHour, 10);
+
+      const eventId = eventItem.id.split('-')[1];
+      // Fill the form with the event's details
+      document.getElementById('title').value = title;
+      document.getElementById('form_event_id').value = eventId;
+      document.getElementById('start_hours').value = startHour;
+      
+      // Ensure minutes are "00" or "30"
+      document.getElementById('start_minutes').value = startMinute;
+      document.getElementById('start_ampm').value = startAmpm;
+      
+      document.getElementById('end_hours').value = endHour;
+      
+      // Ensure minutes are "00" or "30"
+      document.getElementById('end_minutes').value = endMinute;
+      document.getElementById('end_ampm').value = endAmpm;
+
+      // Show the overlay
+      document.getElementById('overlay').classList.remove('hidden');
+    }
+
+    // Attach the event listener to each event item
+    const eventItems = document.querySelectorAll('li[id^="event-"]');
+    eventItems.forEach(item => {
+        item.addEventListener('click', () => {
+            fillOverlayWithEventData(item);
+        });
+    });
+
+      
+  });
+</script>
+  
+</html>

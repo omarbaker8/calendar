@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Month:{{ month }} Year:{{ year }}</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script> 
+</head>
+<body>
+    <div id="overlay" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex justify-center">
+        <div class="divide-y divide-gray-200 overflow-hidden rounded-lg shadow m-20 bg-cover h-3/6 w-3/6 mt-32 bg-stone-50">
+            <div class="px-4 py-5 sm:p-6 flex justify-evenly">
+                <div class="pr-3 border-gray-600 border-r pt-9">
+                    <div id="start_time" class="mt-2 rounded-lg w-full flex justify-center">
+                        <div class="self-center pt-2 text-2xl font-thin text-gray-700">
+                            <h1>Start:</h1>
+                        </div>
+                        <div class="mt-2 shadow-xl bg-slate-50 border ml-4 rounded-full">
+                            <div class="flex">
+                                <select name="start_hours" id="start_hours" class="bg-transparent appearance-none outline-none border-0 rounded-full font-thin">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <span class="text-xl mr-3">:</span>
+                                <select name="start_minutes" id="start_minutes" class="bg-transparent appearance-none outline-none mr-4 border-0 rounded-full font-thin">
+                                    <option value="0">00</option>
+                                    <option value="30">30</option>
+                                </select>
+                                <select name="start_ampm" id="start_ampm" class="bg-transparent text-lg appearance-none outline-none border-0 rounded-full font-thin">
+                                    <option value="am">AM</option>
+                                    <option value="pm">PM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="end_time" class="mt-2 rounded-lg w-full flex justify-center rounded-full">
+                        <div class="self-center pt-2 text-2xl font-thin text-gray-700">
+                            <h1>End :</h1>
+                        </div>
+                        <div class="mt-2 shadow-xl bg-slate-50 border ml-4 rounded-full">
+                            <div class="flex">
+                                <select name="end_hours" id="end_hours" class="bg-transparent border-0 appearance-none outline-none rounded-full font-thin">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <span class="text-xl mr-3">:</span>
+                                <select name="end_minutes" id="end_minutes" class="bg-transparent border-0 appearance-none outline-none mr-4 rounded-full font-thin">
+                                    <option value="0">00</option>
+                                    <option value="30">30</option>
+                                </select>
+                                <select name="end_ampm" id="end_ampm" class="bg-transparent text-lg border-0 appearance-none outline-none rounded-full font-thin">
+                                    <option value="am">AM</option>
+                                    <option value="pm">PM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-full w-full">
+                    <div class="text-center pb-2 font-lg font-thin text-2xl">Date</div>
+                    <div class="pl-3 isolate grid grid-cols-7 gap-px rounded-lg">
+                        {% for day in range(1, data[2] + 1) %}
+                        <button class="rounded-full bg-stone-50 text-gray-900 focus:z-10 pl-3 h-fit">
+                            <time id="s-{{ day }}" datetime="{{ year }}-{{month}}-{{ day }}" class="mx-auto flex items-center rounded-full hover:bg-sky-300 font-thin justify-evenly rounded-full">{{ day }}</time>
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="px-4 py-14 bg-prose-stone">
+                    <form action="addEvent-title" class="relative">
+                        <div class="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                            <label for="title" class="sr-only">Title</label>
+                            <input type="text" name="title" id="title" class="block w-full border-0 pt-2.5 text-lg placeholder:text-gray-400 focus:ring-0 font-thin h-9" placeholder="Title" />
+                        </div>
+                        <div class="flex items-center justify-center space-x-3 px-2 py-5">
+                            <div class="flex-shrink-0">
+                                <button id="cancel_event" class="mr-2 inline-flex items-center rounded-md bg-rose-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:hover:bg-rose-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">Cancel</button>
+                                <button id="create_event" class="ml-2 inline-flex items-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">Create</button>
+                            </div>
+                        </div>                          
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id ="main-content" class="bg-gray-100 pb-10 visible ">
+        <div class="xlg bg-gray-100 pb-20">
+            <div class="lg:flex lg:h-full lg:flex-col">
+                <header class="flex justify-between border-b border-gray-200 py-4 px-6 mx-20">
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">
+                        <time class="font-thin text-2xl" datetime="{{ year }}-{{ month }}">Month: {{ month }}     Year: {{ year }}</time>
+                    </h1>
+                    <button type="button" id="add-event" class="rounded-full bg-sky-600 p-2 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <svg class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                        </svg>
+                    </button>
+                </header>
+                <div class="flex items-center justify-center font-thin">
+                    <div class="grow-0 px-3 sticky">
+                        <button id="prevMonthButton" type="button" class="flex min-w-5 sm:min-w-20 items-center justify-center rounded-full border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-sky-100">
+                            <svg class="h-20 w-20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="shadow grow ring-1 ring-black ring-opacity-5 lg:flex lg:flex-auto lg:flex-col">
+                        <div class="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
+                            <div class="flex justify-center bg-white py-2"><span>M</span><span class="sr-only sm:not-sr-only">on</span></div>
+                            <div class="flex justify-center bg-white py-2"><span>T</span><span class="sr-only sm:not-sr-only">ue</span></div>
+                            <div class="flex justify-center bg-white py-2"><span>W</span><span class="sr-only sm:not-sr-only">ed</span></div>
+                            <div class="flex justify-center bg-white py-2"><span>T</span><span class="sr-only sm:not-sr-only">hu</span></div>
+                            <div class="flex justify-center bg-white py-2"><span>F</span><span class="sr-only sm:not-sr-only">ri</span></div>
+                            <div class="flex justify-center bg-white py-2"><span>S</span><span class="sr-only sm:not-sr-only">at</span></div>
+                            <div class="flex justify-center bg-white py-2"><span>S</span><span class="sr-only sm:not-sr-only">un</span></div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-px">
+                            {% for _ in range(data[1]) %}
+                            <div class="relative px-3 py-2 bg-gray-50 lg:min-h-28 lg:min-w-28 flex-col justify-between text-left">
+                            </div>
+                            {% endfor %}
+                            {% for day in range(1, data[2] + 1) %}
+                            <div id="d-{{ day }}" class="relative px-3 py-2 bg-white lg:min-h-28 lg:min-w-28 hover:bg-sky-100 flex justify-between text-left flex-col">
+                                <time datetime="{{ year }}-{{ month }}-{{ day }}">{{ day }}</time>
+                                {% if month_events.get(day) %}
+                                <div class="h-full w-full flex justify-between items-end">
+                                    <div id="event-{{ day }}" class="text-rose-600">{{ month_events.get(day) }} event(s)</div>
+                                    <button type="button" id="mini-add-{{ day }}" class="rounded-full bg-sky-600 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-7 w-7">
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            {% for _ in range(data[3]) %}
+                            <div class="relative px-3 py-2 bg-gray-50 lg:min-h-28 lg:min-w-28">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="grow-0 px-3 sticky">
+                        <button id="nextMonthButton" type="button" class="flex min-w-5 sm:min-w-20 items-center justify-center rounded-full border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-sky-100">
+                            <svg class="h-20 w-20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script defer>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const prevMonthButton = document.getElementById('prevMonthButton');
+        const nextMonthButton = document.getElementById('nextMonthButton');
+        const addEventButton = document.getElementById('add-event');
+        const cancelEventButton = document.getElementById('cancel_event');
+        const createEventButton = document.getElementById('create_event');
+        const days = document.querySelectorAll('[id^="d-"]');
+        const sDays = document.querySelectorAll('[id^="s-"]');
+        const miniAdd=document.querySelectorAll('[id^="mini-add-"]');
+        const currentMonth = {{ month }};
+        const currentYear = {{ year }};
+        let selectedDay;
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            console.log('currentMonth:', currentMonth, 'currentYear:', currentYear);
+        });
+        
+        prevMonthButton.addEventListener('click', () => {
+            let newMonth = currentMonth - 1;
+            let newYear = currentYear;
+            if (newMonth < 1) {
+                newMonth = 12;
+                newYear -= 1;
+            }
+            window.location.href = `/welcome?month=${newMonth}&year=${newYear}`;
+        });
+        
+        nextMonthButton.addEventListener('click', () => {
+            let newMonth = currentMonth + 1;
+            let newYear = currentYear;
+            if (newMonth > 12) {
+                newMonth = 1;
+                newYear += 1;
+            }
+            window.location.href = `/welcome?month=${newMonth}&year=${newYear}`;
+        });
+
+        addEventButton.addEventListener('click', () => {
+            const overlay = document.getElementById('overlay');
+            overlay.classList.toggle('hidden');
+        });
+        
+        cancelEventButton.addEventListener('click', () => {
+            const overlay = document.getElementById('overlay');
+            overlay.classList.toggle('hidden');
+        });
+
+        days.forEach((dayButton) => {
+            dayButton.addEventListener('click', () => {
+                // Extract the day number from the <time> element within the clicked button
+                const timeElement = dayButton.querySelector('time');
+                const dayNumber = timeElement.textContent.trim();
+                const date = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${dayNumber.padStart(2, '0')}`;
+                // Construct the ID for the event details div based on the day number
+                const eventDetailsId = `event-${dayNumber}`;
+                const eventDetailsDiv = document.getElementById(eventDetailsId);
+                
+                // Log the event details div to the console
+                if (eventDetailsDiv) {
+                    console.log(`Events for ${date}:`, eventDetailsDiv.textContent);
+                    window.location.href = `/dayView?date=${encodeURIComponent(date)}`;
+                } else {
+                    const overlay = document.getElementById('overlay');
+                    overlay.classList.toggle('hidden');
+                    const eventDetailsId = `s-${dayNumber}`;
+                    const eventDetailsDiv = document.getElementById(eventDetailsId);
+                    eventDetailsDiv.click();
+                }
+            });
+        });
+
+        // Event listener for mini-add buttons
+        miniAdd.forEach((miniAddButton) => {
+            miniAddButton.addEventListener('click', (event) => {
+                // Prevent the event from bubbling up to parent elements
+                event.stopPropagation();
+
+                // Extract the day number from the button's ID
+                const dayNumber = miniAddButton.id.split('-')[2];
+
+                // Toggle the overlay to show the event creation form
+                const overlay = document.getElementById('overlay');
+                overlay.classList.toggle('hidden');
+
+                // Set the selected day based on the clicked button
+                // Ensure previously selected day is deselected
+                if (selectedDay) {
+                    selectedDay.classList.remove('bg-sky-300');
+                    selectedDay.classList.add('bg-stone-50');
+                }
+
+                // Select the new day based on mini-add button clicked
+                const selectedDayElement = document.querySelector(`#s-${dayNumber}`);
+                if (selectedDayElement) {
+                    selectedDayElement.classList.add('bg-sky-300');
+                    selectedDayElement.classList.remove('bg-stone-50');
+                    selectedDay = selectedDayElement;
+                }
+
+                // Optional: Auto-fill the date in the event creation form based on selected day
+                // This assumes you have an input field for the event date in your overlay form
+                const eventDateInput = document.getElementById('event-date'); // Assume this is the ID of your date input
+                if (eventDateInput) {
+                    eventDateInput.value = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${dayNumber.padStart(2, '0')}`;
+                }
+            });
+        });
+
+
+
+        sDays.forEach((day) => {
+            day.addEventListener('click', () => {
+                if (selectedDay) {
+                    selectedDay.classList.remove('bg-sky-300');
+                    selectedDay.classList.add('bg-stone-50');
+                }
+                day.classList.remove('bg-stone-50');
+                day.classList.add('bg-sky-300');
+                selectedDay = day;
+            });
+        });
+
+        createEventButton.addEventListener('click', () => {
+            const title = document.getElementById('title').value.trim();
+            const startHours = parseInt(document.getElementById('start_hours').value, 10);
+            const startMinutes = parseInt(document.getElementById('start_minutes').value, 10);
+            const startAmpm = document.getElementById('start_ampm').value;
+            const endHours = parseInt(document.getElementById('end_hours').value, 10);
+            const endMinutes = parseInt(document.getElementById('end_minutes').value, 10);
+            const endAmpm = document.getElementById('end_ampm').value;
+
+            // Convert to 24-hour format for comparison
+            const startHours24 = startAmpm === 'pm' ? (startHours % 12) + 12 : startHours % 12;
+            const endHours24 = endAmpm === 'pm' ? (endHours % 12) + 12 : endHours % 12;
+
+            const startTime = new Date(0, 0, 0, startHours24, startMinutes);
+            const endTime = new Date(0, 0, 0, endHours24, endMinutes);
+            //in yyyy-mm-dd format
+
+
+            // Check if all fields are set
+            if (!title || isNaN(startTime.getTime()) || isNaN(endTime.getTime()) || !selectedDay) {
+                alert('Please make sure all fields are filled out correctly.');
+                return;
+            }
+
+            // Check if the end time is after the start time
+            if (endTime <= startTime) {
+                alert('End time must be after start time.');
+                return;
+            }
+            const date = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${selectedDay.textContent.padStart(2, '0')}`;
+            const formattedStartTime = `${startHours24.toString().padStart(2, '0')}:${startMinutes.toString().padStart(2, '0')}`;
+            const formattedEndTime = `${endHours24.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
+
+            fetch('/addEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title,
+                    start_time: formattedStartTime,
+                    end_time: formattedEndTime,
+                    date,
+                }),
+            })
+            .then(response => response.json())
+		    .then(data => {
+			if (data.success && data.redirect_url) {
+            // Redirect to the URL provided by the server
+            window.location.href = data.redirect_url;
+            }});
+        });
+
+
+    });
+</script>
+</html>
