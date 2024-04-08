@@ -108,7 +108,7 @@
     <div id ="main-content" class="bg-gray-100 pb-10 visible ">
         <div class="xlg bg-gray-100 pb-20">
             <div class="lg:flex lg:h-full lg:flex-col">
-                <header class="flex justify-between border-b border-gray-200 py-4 px-6 mx-20">
+                <header class="flex justify-between border-b border-gray-200 py-4 px-6 mx-20 bg-lime-100">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">
                         <time class="font-thin text-2xl" datetime="{{ year }}-{{ month }}">Month: {{ month }}     Year: {{ year }}</time>
                     </h1>
@@ -188,6 +188,20 @@
         const currentMonth = {{ month }};
         const currentYear = {{ year }};
         let selectedDay;
+
+
+        const today = new Date();
+        const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1)}-${String(today.getDate())}`;
+
+        // Highlight the current day
+        days.forEach((day) => {
+            const date = day.querySelector('time').getAttribute('datetime');
+            console.log(date, formattedToday);
+            if (date === formattedToday) {
+                day.classList.add('bg-sky-200'); // Apply highlight class
+            }
+        });
+        
 
         document.querySelector('form').addEventListener('submit', (event) => {
             event.preventDefault();

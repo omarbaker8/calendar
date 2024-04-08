@@ -41,14 +41,8 @@ def home_form():
         print(f'User: {user}')
         
         if action == 'sign_in':
-            # if the user is already authenticated and its the same user as the one trying to login then return success else expire session and login the new user
-            if current_user.is_authenticated and current_user.email == email:
-                print(current_user.email == email)
-                print('User is already authenticated')
-                return jsonify(success=True, redirect_url=url_for('welcome')), 200 
-            if current_user.is_authenticated and current_user.email != email:
-                # logout the user current user session
-                print('Logging out the current user')
+            
+            if current_user.is_authenticated:
                 logout_user()
 
 
